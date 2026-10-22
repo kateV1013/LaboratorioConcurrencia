@@ -3,9 +3,16 @@ package tareas;
 public class ProcesoVentanilla implements Runnable {
 
     private final String nombre;
+    private final modelo.ContadorCompartido contador;
 
     public ProcesoVentanilla(String nombre) {
         this.nombre = nombre;
+        this.contador = null;
+    }
+
+    public ProcesoVentanilla(String nombre, modelo.ContadorCompartido contador) {
+        this.nombre = nombre;
+        this.contador = contador;
     }
 
     public String getNombre() {
@@ -14,6 +21,18 @@ public class ProcesoVentanilla implements Runnable {
 
     @Override
     public void run() {
-        // Clase base para implementar la tarea concurrente de la ventanilla
+        for (int i = 1; i <= 5; i++) {
+            System.out.println(nombre + " procesando turno " + i);
+            if (contador != null) {
+                contador.incrementar(); // Incrementa el contador compartido
+            }
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                System.out.println(nombre + " interrumpido.");
+                Thread.currentThread().interrupt(); // Buena práctica
+                return;
+            }
+        }
     }
 }
