@@ -31,6 +31,16 @@ public class ProcesoVentanilla implements Runnable {
             } catch (InterruptedException e) {
                 System.out.println(nombre + " interrumpido.");
                 Thread.currentThread().interrupt(); // Buena práctica
+            if (Thread.currentThread().isInterrupted()) {
+                return;
+            }
+
+            System.out.println("[" + Thread.currentThread().getName() + "] " + nombre + " procesa " + i);
+
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
                 return;
             }
         }
