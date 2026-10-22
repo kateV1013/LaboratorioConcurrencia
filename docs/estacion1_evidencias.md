@@ -1,7 +1,7 @@
 # Estación 1: Thread y Runnable — Evidencias y Análisis Técnico
 
 **Integrante 1**  
-**Rama:** `feature/integrante-1`  
+**Rama:** `feature/wigar03`  
 **Asignatura:** Programación de Aplicaciones de Escritorio — JavaFX
 
 ---
