@@ -14,6 +14,19 @@ public class ProcesoVentanilla implements Runnable {
 
     @Override
     public void run() {
-        // Clase base para implementar la tarea concurrente de la ventanilla
+        for (int i = 1; i <= 5; i++) {
+            if (Thread.currentThread().isInterrupted()) {
+                return;
+            }
+
+            System.out.println("[" + Thread.currentThread().getName() + "] " + nombre + " procesa " + i);
+
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                return;
+            }
+        }
     }
 }
