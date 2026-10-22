@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.shape.SVGPath?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controlador.VentanillasController"
+      prefWidth="860.0" prefHeight="660.0" spacing="20.0"
+      style="-fx-background-color: #f4f7f3; -fx-font-family: 'Segoe UI'; -fx-font-size: 13px; -fx-text-base-color: #303c37;">
+    <padding>
+        <Insets top="26.0" right="26.0" bottom="26.0" left="26.0" />
+    </padding>
+    <children>
+        <HBox spacing="18.0" alignment="CENTER_LEFT"
+              style="-fx-background-color: #25685f; -fx-background-radius: 8px; -fx-padding: 20px 22px;">
+            <children>
+                <VBox spacing="7.0" HBox.hgrow="ALWAYS">
+                    <children>
+                        <Label text="Simulación de ventanillas"
+                               style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white;" />
+                        <Label text="Ventanilla A y Ventanilla B · 5 turnos cada una"
+                               wrapText="true" style="-fx-text-fill: #d3e6dc;" />
+                    </children>
+                </VBox>
+                <HBox spacing="7.0" alignment="CENTER_RIGHT">
+                    <children>
+                        <Label text="A" alignment="CENTER" minWidth="40.0" minHeight="42.0"
+                               style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-background-color: #3a8175; -fx-background-radius: 5px; -fx-text-fill: white;" />
+                        <Label text="B" alignment="CENTER" minWidth="40.0" minHeight="42.0"
+                               style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-background-color: #efc48b; -fx-background-radius: 5px; -fx-text-fill: #604a2d;" />
+                    </children>
+                </HBox>
+            </children>
+        </HBox>
+
+        <VBox spacing="16.0"
+              style="-fx-background-color: white; -fx-border-color: #37977f; -fx-border-width: 0 0 0 4px; -fx-border-radius: 6px; -fx-background-radius: 6px; -fx-padding: 16px 20px;">
+            <children>
+                <HBox spacing="20.0" alignment="CENTER_LEFT">
+                    <children>
+                        <VBox spacing="7.0" HBox.hgrow="ALWAYS">
+                            <children>
+                                <Label text="Estado" style="-fx-text-fill: #6a7177;" />
+                                <HBox spacing="10.0" alignment="CENTER_LEFT">
+                                    <children>
+                                        <Label fx:id="estado" id="estado" text="En espera"
+                                               style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2e5147;" />
+                                        <StackPane minWidth="10.0" prefWidth="10.0" maxWidth="10.0">
+                                            <children>
+                                                <Circle radius="4.5" fill="#8b9c93" visible="${estado.text == 'En espera'}" />
+                                                <Circle radius="4.5" fill="#299b71" visible="${estado.text == 'Ejecutando'}" />
+                                                <Circle radius="4.5" fill="#dc9a36" visible="${estado.text == 'Deteniendo'}" />
+                                                <Circle radius="4.5" fill="#c46758" visible="${estado.text == 'Detenido'}" />
+                                                <Circle radius="4.5" fill="#299b71" visible="${estado.text == 'Finalizado'}" />
+                                            </children>
+                                        </StackPane>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                        <VBox spacing="4.0" alignment="CENTER_RIGHT"
+                              style="-fx-background-color: #fff4e3; -fx-background-radius: 6px; -fx-padding: 8px 14px;">
+                            <children>
+                                <Label text="Turnos atendidos" style="-fx-text-fill: #6a7177;" />
+                                <HBox spacing="6.0" alignment="BASELINE_RIGHT">
+                                    <children>
+                                        <Label fx:id="contadorLabel" id="contador" text="0"
+                                               style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #25685f;" />
+                                        <Label text="de 10" style="-fx-text-fill: #6a7177;" />
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+                <ProgressBar fx:id="progreso" id="progreso" progress="0.0" maxWidth="Infinity"
+                             minHeight="10.0" prefHeight="10.0" maxHeight="10.0"
+                             style="-fx-accent: #37977f; -fx-control-inner-background: #e9f1e9; -fx-box-border: #d8e5db; -fx-shadow-highlight-color: transparent;" />
+            </children>
+        </VBox>
+
+        <VBox spacing="10.0">
+            <children>
+                <HBox spacing="10.0">
+                    <children>
+                        <Button fx:id="botonIniciar" id="iniciar" text="Iniciar" defaultButton="true"
+                                onAction="#iniciar"
+                                graphicTextGap="9.0"
+                                style="-fx-font-weight: bold; -fx-background-radius: 5px; -fx-padding: 10px 25px; -fx-cursor: hand; -fx-background-color: #287e69; -fx-text-fill: white;">
+                            <graphic>
+                                <SVGPath content="M 0 0 L 0 10 L 8 5 Z" fill="WHITE" />
+                            </graphic>
+                        </Button>
+                        <Button fx:id="botonDetener" id="detener" text="Detener" disable="true"
+                                onAction="#detener"
+                                graphicTextGap="9.0"
+                                style="-fx-background-radius: 5px; -fx-border-radius: 5px; -fx-padding: 9px 25px; -fx-cursor: hand; -fx-background-color: #fff2ed; -fx-text-fill: #a34f43; -fx-border-color: #e6bcb1;">
+                            <graphic>
+                                <Rectangle width="8.0" height="8.0" arcWidth="1.0" arcHeight="1.0" fill="#a34f43" />
+                            </graphic>
+                        </Button>
+                    </children>
+                </HBox>
+                <Label fx:id="indicacion" text="Presioná Iniciar para comenzar."
+                       wrapText="true" style="-fx-text-fill: #6a7177;" />
+            </children>
+        </VBox>
+
+        <VBox spacing="10.0" VBox.vgrow="ALWAYS">
+            <children>
+                <HBox spacing="12.0" alignment="CENTER_LEFT">
+                    <children>
+                        <Label text="Registro de turnos"
+                               style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #25685f;" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Label text="Ventanillas A y B" style="-fx-font-size: 12px; -fx-text-fill: #6a7177;" />
+                    </children>
+                </HBox>
+                <TextArea fx:id="logs" id="logs" editable="false" wrapText="true"
+                          prefRowCount="10" minHeight="100.0" VBox.vgrow="ALWAYS"
+                          promptText="Los turnos atendidos aparecerán aquí."
+                          style="-fx-font-family: 'Consolas'; -fx-font-size: 12px; -fx-text-fill: #394b43; -fx-control-inner-background: #fcfdfb; -fx-background-color: #fcfdfb; -fx-border-color: #d5e2d7; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-padding: 8px;" />
+            </children>
+        </VBox>
+    </children>
+</VBox>
